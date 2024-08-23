@@ -3,7 +3,7 @@ export const borderRadius = {
 
  ms: 10,
 
- ls: 20,
+ lg: 20,
 
  full: 999,
 };
