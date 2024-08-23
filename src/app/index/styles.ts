@@ -24,6 +24,13 @@ export const styles = StyleSheet.create({
   fontFamily: theme.fonts.family.regular,
   marginTop: 12,
   marginBottom: 38,
-  color: theme.colors.gray_400
+  color: theme.colors.gray_400,
+ },
+
+ ingredientsContainer: {
+  flexWrap: "wrap",
+  flexDirection: "row",
+  paddingBottom: 200,
+  gap: 10,
  },
 });
