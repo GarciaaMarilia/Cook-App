@@ -5,6 +5,7 @@ import Animated, { BounceOutDown, SlideInDown } from "react-native-reanimated";
 
 import { theme } from "@/theme";
 import { styles } from "./styles";
+import { Button } from "../Button";
 
 type Props = {
  quantity: number;
@@ -28,6 +29,8 @@ export function Selected({ onClear, onSearch, quantity }: Props) {
      color={theme.colors.gray_400}
     />
    </View>
+
+   <Button title="Search" onPress={onSearch}/>
   </Animated.View>
  );
 }

@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, ScrollView, Text, View } from "react-native";
 
+import { router } from "expo-router";
+
 import { styles } from "./styles";
+import { services } from "@/services";
 import { Selected } from "@/components/Selected";
 import { Ingredient } from "@/components/Ingredient";
+import { IngredientResponse } from "@/services/services.types";
 
 export default function Index() {
- const [selected, setSelected] = useState<string[]>([]); // Fazer tipagem dos ingredients se necessario
+ const [selected, setSelected] = useState<string[]>([]); 
+ const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
 
  function handleIngredientSelected(value: string) {
   if (selected?.includes(value)) {
@@ -22,7 +27,13 @@ export default function Index() {
   ]);
  }
 
- function handleSearchSelected() {}
+ function handleSearchSelected() {
+  router.navigate("/recipes/" + selected);
+ }
+
+ useEffect(() => {
+  services.ingredients.findAll().then((data) => setIngredients(data));
+ }, []);
 
  return (
   <View style={styles.container}>
@@ -37,13 +48,13 @@ export default function Index() {
     showsVerticalScrollIndicator={false}
     contentContainerStyle={styles.ingredientsContainer}
    >
-    {Array.from({ length: 100 }).map((item, index) => (
+    {ingredients.map((item) => (
      <Ingredient
-      key={index}
-      name="Apple"
-      image=""
-      selected={selected.includes(String(index))}
-      onPress={() => handleIngredientSelected(String(index))}
+      key={item.id}
+      name={item.name}
+      image={`${services.storage.imagePath}/${item.image}`}
+      selected={selected.includes(item.id)}
+      onPress={() => handleIngredientSelected(item.id)}
      />
     ))}
    </ScrollView>
