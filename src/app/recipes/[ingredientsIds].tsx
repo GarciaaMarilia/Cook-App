@@ -53,7 +53,7 @@ export default function Recipes() {
     renderItem={({ item }) => (
      <Recipe
       recipe={item}
-      onPress={() => router.navigate("/recipe/" + item.id)}
+      onPress={() => router.navigate(`/recipe/${item.id}`)}
      />
     )}
     style={styles.recipes}

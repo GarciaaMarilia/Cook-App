@@ -10,7 +10,7 @@ import { Ingredient } from "@/components/Ingredient";
 import { IngredientResponse } from "@/services/services.types";
 
 export default function Index() {
- const [selected, setSelected] = useState<string[]>([]); 
+ const [selected, setSelected] = useState<string[]>([]);
  const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
 
  function handleIngredientSelected(value: string) {
@@ -28,7 +28,7 @@ export default function Index() {
  }
 
  function handleSearchSelected() {
-  router.navigate("/recipes/" + selected);
+  router.navigate(`/recipes/${selected}`);
  }
 
  useEffect(() => {

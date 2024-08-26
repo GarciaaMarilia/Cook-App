@@ -47,7 +47,7 @@ export default function Recipes() {
  }
 
  if (!id || !recipe) {
-  return <Redirect href="/" />;
+  return <Redirect href="/index" />;
  }
 
  return (
