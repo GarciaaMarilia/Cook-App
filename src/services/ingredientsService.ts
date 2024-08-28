@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 
-import { IngredientResponse } from "./services.types";
+import { IngredientResponse, IngredientsByRecipe } from "./services.types";
 
 async function findByIds(ids: string[]) {
  const { data } = await supabase
@@ -16,11 +16,11 @@ async function findByIds(ids: string[]) {
 async function findByRecipeId(id: string) {
  const { data } = await supabase
   .from("recipes_ingredients")
-  .select("ingredients (id, name, image)")
+  .select()
   .eq("recipe_id", id)
-  .returns<{ ingredients: IngredientResponse }[]>();
+  .returns<IngredientsByRecipe[]>();
 
- return data ? data.map((item) => item.ingredients) : [];
+ return data ? data : [];
 }
 
 async function findAll() {
