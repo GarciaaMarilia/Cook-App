@@ -19,3 +19,9 @@ type RecipeResponse = {
  image: string;
  minutes: number;
 };
+
+type IngredientsByRecipe = {
+ id: string;
+ ingredient_id: string;
+ recipe_id: string;
+};
