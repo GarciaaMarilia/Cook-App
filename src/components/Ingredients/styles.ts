@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
   },
   ingredientsContent: {
     gap: 12,
-    paddingHorizontal: 32,
+    paddingVertical: 14,
+    marginHorizontal: 30,
   },
 })
