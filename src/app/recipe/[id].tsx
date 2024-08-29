@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
@@ -70,11 +70,21 @@ export default function Recipes() {
   <View style={styles.container}>
    <Image source={{ uri: recipe.image }} style={styles.image} />
 
-   <ScrollView showsVerticalScrollIndicator={false} style={styles.body}>
+   <ScrollView
+    showsVerticalScrollIndicator={false}
+    scrollEnabled
+    style={styles.body}
+   >
     <View style={styles.header}>
-     <MaterialIcons size={32} name="arrow-back" onPress={() => router.back()} />
+     <View style={styles.title}>
+      <MaterialIcons
+       size={32}
+       name="arrow-back"
+       onPress={() => router.back()}
+      />
 
-     <Text style={styles.name}>{recipe.name}</Text>
+      <Text style={styles.name}>{recipe.name}</Text>
+     </View>
      <Text style={styles.time}>{recipe.minutes} minutes to prepare</Text>
     </View>
 
@@ -83,14 +93,15 @@ export default function Recipes() {
     <View style={styles.content}>
      <Text style={styles.preparation}>Preparation method</Text>
 
-     <FlatList
-      data={preparations}
-      renderItem={({ item }) => (
-       <Step step={item.step} description={item.description} />
-      )}
-      contentContainerStyle={{ gap: 16 }}
-      showsVerticalScrollIndicator={false}
-     />
+     {preparations.map((preparation) => {
+      return (
+       <Step
+        key={preparation.id}
+        step={preparation.step}
+        description={preparation.description}
+       />
+      );
+     })}
     </View>
    </ScrollView>
   </View>
